@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  require "user.vscode_keymaps"
+  return
+end
 --[[
 
 =====================================================================
@@ -246,9 +250,17 @@ rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
+  {
+    'rust-lang/rust.vim',
+    ft = 'rust',
+    config = function()
+      vim.g.rust_recommended_style = 0
+    end,
+  },
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -1011,6 +1023,7 @@ require('lazy').setup({
     },
   },
 })
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
